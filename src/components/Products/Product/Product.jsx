@@ -4,8 +4,7 @@ import { Card as MuiCard, CardMedia as MuiCardMedia, CardContent, CardActions, T
 import { AddShoppingCart } from '@mui/icons-material';
 import { StyledRoot, StyledMedia, StyledCardContent, StyledCardActions } from './Styles.js'
 
-const Product = ({ product }) => {
-    console.log(product);
+const Product = ({ product, onAddToCart }) => {
 
     return (
         <StyledRoot>
@@ -21,10 +20,12 @@ const Product = ({ product }) => {
                 </StyledCardContent>
                 <Typography variant="body2"
                     color="textSecondary"
-                    dangerouslySetInnerHTML={{ __html: product.description }}/>
+                    dangerouslySetInnerHTML={{ __html: product.description }} />
             </CardContent>
             <StyledCardActions disableSpacing>
-                <IconButton aria-label="Add to Cart">
+                <IconButton aria-label="Add to Cart"
+                    onClick={() => onAddToCart(product.id, 1)}>
+                        
                     <AddShoppingCart />
                 </IconButton>
             </StyledCardActions>

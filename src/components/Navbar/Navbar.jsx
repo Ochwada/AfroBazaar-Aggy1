@@ -7,7 +7,7 @@ import { StyledAppBar, StyledTitle, StyledImage, StyledIconButton,  StyledBadge,
 
 
 
-const Navbar = () => {
+const Navbar = ({totalItems}) => {
     return (
         <StyledAppBar component={AppBar} position='fixed' color='inherit'>
             <Toolbar>
@@ -18,7 +18,7 @@ const Navbar = () => {
                 <div style={{ flexGrow: 1 }} /> {/* This replaces classes.grow */}
                 <div style={{ display: 'flex' }}> {/* This replaces classes.button */}
                     <StyledIconButton aria-label='Show cart items' color='inherit'>
-                        <StyledBadge badgeContent={2} color='secondary'>
+                        <StyledBadge badgeContent={totalItems} color='secondary'>
                             <ShoppingCart />
                         </StyledBadge>
                     </StyledIconButton>
