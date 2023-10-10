@@ -1,29 +1,24 @@
 // Styles.js
 import styled from "@emotion/styled";
+import { Card as MuiCard, CardMedia as MuiCardMedia } from '@mui/material';
 
-const StyledRoot = styled.div`
-  width: 100%;
+export const StyledRoot = styled(MuiCard)`
+  maxWidth: 100%;
+
 `;
 
-const StyledMedia = styled.img`
+export const StyledMedia = styled(MuiCardMedia)`
+    height: 225px;
     paddingTop: 56.25%; // 16:9 aspect ratio
 `;
 
-const StyledCardContent = styled.div`
+export const StyledCardContent = styled.div`
     display: flex;
     justify-content: space-between;
+
 `;
 
-const StyledCardActions = styled.div`
+export const StyledCardActions = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
-
-
-
-export {
-    StyledRoot,
-    StyledMedia,
-    StyledCardContent,
-    StyledCardActions
-};

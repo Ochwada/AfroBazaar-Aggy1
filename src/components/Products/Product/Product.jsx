@@ -1,32 +1,34 @@
 // Product.jsx
 import React from 'react';
-import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } from '@mui/material';
+import { Card as MuiCard, CardMedia as MuiCardMedia, CardContent, CardActions, Typography, IconButton } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
-import { StyledRoot, StyledMedia, StyledCardContent, StyledCardActions } from './Styles.js';
+import { StyledRoot, StyledMedia, StyledCardContent, StyledCardActions } from './Styles.js'
 
 const Product = ({ product }) => {
+    console.log(product);
+
     return (
-        <Card as={StyledRoot}>
-            <CardMedia as={StyledMedia} image= { product.image } title={product.name} />
-            <CardContent as={StyledCardContent}>
-                <div>
+        <StyledRoot>
+            <StyledMedia image={product.image.url} title={product.name} />
+            <CardContent>
+                <StyledCardContent>
                     <Typography variant="h5" gutterBottom>
                         {product.name}
                     </Typography>
-                    <Typography variant="h5" >
-                        {product.price}
+                    <Typography variant="h5">
+                        {product.price.formatted_with_symbol}
                     </Typography>
-                </div>
-                <Typography variant="body2" color="textSecondary" >
-                    {product.description}
-                </Typography>
+                </StyledCardContent>
+                <Typography variant="body2"
+                    color="textSecondary"
+                    dangerouslySetInnerHTML={{ __html: product.description }}/>
             </CardContent>
-            <CardActions disableSpacing as={StyledCardActions}>
-                <IconButton aria-label="Add to Card">
+            <StyledCardActions disableSpacing>
+                <IconButton aria-label="Add to Cart">
                     <AddShoppingCart />
                 </IconButton>
-            </CardActions>
-        </Card>
+            </StyledCardActions>
+        </StyledRoot>
     )
 }
 
