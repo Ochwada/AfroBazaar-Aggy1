@@ -1,0 +1,56 @@
+import React from 'react';
+import { Container, Typography, Button, Grid } from '@mui/material';
+
+import {
+    StyledMain, StyledGridContainer, StyledGridItem, StyledTypographyTitle,
+    StyledEmptyButton, StyledCheckoutButton, StyledLink, StyledCardDetails,
+} from './Styles';
+
+
+const Cart = ({ cart }) => {
+    const isEmpty = !cart?.line_items?.length;
+
+    const EmptyCart = () => (
+        <Typography variant="subtitle">
+            You have no items in your shopping cart, please add some!
+        </Typography>
+    );
+
+    const FilledCart = () => (
+        <>
+            <StyledGridContainer container spacing={3}>
+                {cart.line_items.map((item) => (
+                    <StyledGridItem item xs={12} sm={4} key={item.id}>
+                        <div>{item.name}</div>
+                    </StyledGridItem>
+                ))}
+            </StyledGridContainer>
+            <StyledCardDetails>
+                <Typography variant='h4'>
+                    Subtotal: {cart.subtotal.formatted_with_symbol}
+                </Typography>
+                <div>
+                    <StyledEmptyButton size='large' type='button' variant='contained' color='secondary'>
+                        Empty Cart
+                    </StyledEmptyButton>
+                    <StyledCheckoutButton size='large' type='button' variant='contained' color='primary'>
+                        Checkout
+                    </StyledCheckoutButton>
+                </div>
+            </StyledCardDetails>
+        </>
+    );
+
+    if(!cart.line_items) return 'Loading ...'
+    return (
+        <Container>
+            <StyledMain />
+            <StyledTypographyTitle variant='h3'>
+                Your Shopping Cart
+            </StyledTypographyTitle>
+            {isEmpty ? <EmptyCart /> : <FilledCart />}
+        </Container>
+    );
+}
+
+export default Cart;
