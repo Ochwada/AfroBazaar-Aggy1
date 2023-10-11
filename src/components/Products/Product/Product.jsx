@@ -1,6 +1,6 @@
 // Product.jsx
 import React from 'react';
-import { Card as MuiCard, CardMedia as MuiCardMedia, CardContent, CardActions, Typography, IconButton } from '@mui/material';
+import { CardContent, Typography, IconButton  } from '@mui/material';
 import { AddShoppingCart } from '@mui/icons-material';
 import { StyledRoot, StyledMedia, StyledCardContent, StyledCardActions } from './Styles.js'
 
@@ -8,6 +8,7 @@ const Product = ({ product, onAddToCart }) => {
 
     return (
         <StyledRoot>
+
             <StyledMedia image={product.image.url} title={product.name} />
             <CardContent>
                 <StyledCardContent>
@@ -25,8 +26,7 @@ const Product = ({ product, onAddToCart }) => {
             <StyledCardActions disableSpacing>
                 <IconButton aria-label="Add to Cart"
                     onClick={() => onAddToCart(product.id, 1)}>
-                        
-                    <AddShoppingCart />
+                    <AddShoppingCart style={{ }}/>
                 </IconButton>
             </StyledCardActions>
         </StyledRoot>

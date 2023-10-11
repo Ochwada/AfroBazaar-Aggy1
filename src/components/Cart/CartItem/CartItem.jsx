@@ -1,6 +1,6 @@
 import React from 'react';
 import { Typography, Button, Card } from '@mui/material';
-import { StyledCardMedia, StyledCardContent, StyledCardActions, StyledButtonsDiv } from './Styles'
+import { StyledButton, StyledCardMedia, StyledCardContent, StyledCardActions, StyledButtonsDiv } from './Styles'
 
 
 const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
@@ -26,9 +26,10 @@ const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
               onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
             > + </Button>
           </StyledButtonsDiv>
-          <Button variant='contained' type="button" color="secondary"
+          <StyledButton variant='contained' type="button"  
+          // style={{ backgroundColor: '#b4a973', color: 'white' }} 
            onClick={() => onRemoveFromCart(item.id)} 
-          >Remove</Button>
+          >Remove</StyledButton>
         </StyledCardActions>
       </Card>
 

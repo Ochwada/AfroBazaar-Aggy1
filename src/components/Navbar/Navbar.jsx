@@ -1,10 +1,10 @@
 import React from 'react';
-import { AppBar, Toolbar, IconButton, Badge, MenuItem, Menu, Typography } from '@mui/material';
+import { AppBar, Toolbar,Typography } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 
 import logo from '../../assets/logo_.png';
-import { StyledAppBar, StyledTitle, StyledImage, StyledIconButton, StyledBadge, StyledMenu, StyledMenuItem } from './Styles.js';
+import { StyledAppBar, StyledTitle, StyledImage, StyledIconButton, StyledBadge} from './Styles.js';
 
 
 

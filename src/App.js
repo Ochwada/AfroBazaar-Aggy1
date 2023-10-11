@@ -65,7 +65,7 @@ const App = () => {
     <Router>
       <ThemeProvider theme={theme}>
         <div>
-          <Navbar totalItems={cart.total_items} />
+          <Navbar totalItems={cart.total_items} products={products} />
           <Routes>
             <Route path="/" element={<Products products={products} onAddToCart={handleAddToCart} />} />
             <Route path="/cart" element={
