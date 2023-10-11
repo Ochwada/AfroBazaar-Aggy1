@@ -5,6 +5,7 @@ import {
     StyledMain, StyledGridContainer, StyledGridItem, StyledTypographyTitle,
     StyledEmptyButton, StyledCheckoutButton, StyledLink, StyledCardDetails,
 } from './Styles';
+import CartItem from './CartItem/CartItem';
 
 
 const Cart = ({ cart }) => {
@@ -21,7 +22,8 @@ const Cart = ({ cart }) => {
             <StyledGridContainer container spacing={3}>
                 {cart.line_items.map((item) => (
                     <StyledGridItem item xs={12} sm={4} key={item.id}>
-                        <div>{item.name}</div>
+                        {/* <div>{item.name}</div> */}
+                        <CartItem item={item}/>
                     </StyledGridItem>
                 ))}
             </StyledGridContainer>
@@ -45,7 +47,7 @@ const Cart = ({ cart }) => {
     return (
         <Container>
             <StyledMain />
-            <StyledTypographyTitle variant='h3'>
+            <StyledTypographyTitle variant='h4' gutterBottom>
                 Your Shopping Cart
             </StyledTypographyTitle>
             {isEmpty ? <EmptyCart /> : <FilledCart />}
