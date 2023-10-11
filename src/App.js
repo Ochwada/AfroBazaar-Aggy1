@@ -6,16 +6,19 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { commerce } from './lib/commerce';
 import { Products, Navbar, Cart } from './components/';
 
+
+
+// ----------- ---- ---------------// 
 // ------- Font Type -------------//  
 const theme = createTheme({
   typography: {
     fontFamily: '"Lora", serif',
   },
-}); 
+});
 
 // ------- useState -------------//  
 const App = () => {
-  
+
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
 
@@ -31,10 +34,24 @@ const App = () => {
   }
 
   const handleAddToCart = async (productId, quantity) => {
-    const item = await commerce.cart.add(productId, quantity);
-    setCart(item.cart);
+    const cart = await commerce.cart.add(productId, quantity);
+    setCart(cart);
   }
 
+  const handleUpdateCartQty = async (productId, quantity) => {
+    const cart = await commerce.cart.update(productId, { quantity });
+    setCart(cart);
+  }
+
+  const handleRemoveFromCart = async (productId) => {
+    const cart = await commerce.cart.remove(productId);
+    setCart(cart);
+  }
+
+  const handleEmptyCart = async () => {
+    const cart = await commerce.cart.empty();
+    setCart(cart);
+  }
 
   // ------- useEffect -------------//  
   useEffect(() => {
@@ -46,14 +63,20 @@ const App = () => {
 
   return (
     <Router>
-      <ThemeProvider theme={theme}> 
-      <div>
-        <Navbar totalItems={cart.total_items} />
-        <Routes>
-        <Route path="/" element={<Products products={products} onAddToCart={handleAddToCart} />} />
-        <Route path="/cart" element={<Cart cart={cart} />} />
-        </Routes>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div>
+          <Navbar totalItems={cart.total_items} />
+          <Routes>
+            <Route path="/" element={<Products products={products} onAddToCart={handleAddToCart} />} />
+            <Route path="/cart" element={
+              <Cart cart={cart}
+                handleUpdateCartQty={handleUpdateCartQty}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleEmptyCart={handleEmptyCart}
+              />
+            } />
+          </Routes>
+        </div>
       </ThemeProvider>
     </Router>
   );

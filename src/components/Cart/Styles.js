@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles';
 import { Grid, Typography, Button} from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export const StyledMain = styled('main')(({ theme }) => ({
     flexGrow: 1,
