@@ -3,7 +3,7 @@ import { CardActions, CardContent, CardMedia } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 export const StyledCardMedia = styled(CardMedia)({
-  height: 240,
+  height: 225,
 });
 
 export const StyledCardContent = styled(CardContent)({

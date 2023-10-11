@@ -11,10 +11,10 @@ const Product = ({ product, onAddToCart }) => {
             <StyledMedia image={product.image.url} title={product.name} />
             <CardContent>
                 <StyledCardContent>
-                    <Typography variant="h5" gutterBottom>
+                    <Typography variant="h6" gutterBottom>
                         {product.name}
                     </Typography>
-                    <Typography variant="h5">
+                    <Typography variant="h6">
                         {product.price.formatted_with_symbol}
                     </Typography>
                 </StyledCardContent>
