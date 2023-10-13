@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Typography } from '@mui/material';
+import React, { useState } from 'react';
+import { Container, Typography, Snackbar } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import {
@@ -11,6 +11,37 @@ import CartItem from './CartItem/CartItem';
 
 
 const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart }) => {
+    // ------- --- 
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    const handleSnackbarClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setSnackbarOpen(false);
+    };
+
+    const handleUpdateQty = (itemId, newQty) => {
+        handleUpdateCartQty(itemId, newQty);
+        setSnackbarMessage('Product quantity updated!');
+        setSnackbarOpen(true);
+    };
+
+    const handleRemove = (itemId) => {
+        handleRemoveFromCart(itemId);
+        setSnackbarMessage('Product removed from cart!');
+        setSnackbarOpen(true);
+    };
+
+    const handleEmpty = () => {
+        handleEmptyCart();
+        setSnackbarMessage('Cart emptied!');
+        setSnackbarOpen(true);
+    };
+
+    // ----- ----
+
     const isEmpty = !cart?.line_items?.length;
 
     const EmptyCart = () => (
@@ -36,7 +67,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
 
             <StyledCardDetails>
                 <Typography variant='h5' style={{ fontWeight: 600 }}>
-                    Subtotal: <span style={{ color: 'green' }}>{cart.subtotal.formatted_with_symbol}</span>
+                    Total Amount: <span style={{ color: '#009900' }}>{cart.subtotal.formatted_with_symbol}</span>
                 </Typography>
                 <div>
                     <StyledEmptyButton size='large' type='button'
@@ -44,7 +75,7 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                         Empty Cart
                     </StyledEmptyButton>
                     <StyledCheckoutButton size='large' type='button'
-                        variant='contained' component={Link} to="/ ">
+                        variant='contained' component={Link} to="/checkout">
                         Checkout
                     </StyledCheckoutButton>
                 </div>
@@ -55,6 +86,8 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
     );
 
     if (!cart.line_items) return 'Loading ...'
+
+    // --- return --- 
     return (
         <Container>
             <StyledMain />
@@ -62,6 +95,16 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
                 Your Shopping Cart
             </StyledTypographyTitle>
             {isEmpty ? <EmptyCart /> : <FilledCart />}
+            <Snackbar
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                open={snackbarOpen}
+                autoHideDuration={3000}
+                onClose={handleSnackbarClose}
+                message={snackbarMessage}
+            />
         </Container>
     );
 }

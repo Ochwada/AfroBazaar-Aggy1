@@ -4,7 +4,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 import { commerce } from './lib/commerce';
-import { Products, Navbar, Cart } from './components/';
+import { Products, Navbar, Cart, Checkout } from './components/';
 
 
 
@@ -74,6 +74,9 @@ const App = () => {
                 handleRemoveFromCart={handleRemoveFromCart}
                 handleEmptyCart={handleEmptyCart}
               />
+            } />
+            <Route path="/checkout" element={
+              <Checkout cart={cart} />
             } />
           </Routes>
         </div>
