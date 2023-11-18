@@ -86,6 +86,9 @@ const Cart = ({ cart, handleUpdateCartQty, handleRemoveFromCart, handleEmptyCart
     );
 
     if (!cart.line_items) return 'Loading ...'
+    if (!cart || !cart.id) {
+        console.error('Cart is empty or Cart ID is undefined.');
+    }
 
     // --- return --- 
     return (

@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 import { StyledGridContainer, StyledGridItem, StyledMain } from './Styles'
 import Product from './Product/Product';
 
