@@ -8,7 +8,7 @@ import FormInput from './FormInput';
 import { Link } from 'react-router-dom';
 
 
-const AddressForm = ({ checkoutToken, next }) => {
+const AddressForm = ({ checkoutToken, next, isCheckoutTokenLoading }) => {
     const [shippingCountries, setShippingCountries] = useState([]);
     const [shippingCountry, setShippingCountry] = useState('');
     const [shippingSubdivisions, setShippingSubdivisions] = useState([]);
@@ -58,7 +58,7 @@ const AddressForm = ({ checkoutToken, next }) => {
     // ----------- Use Effect ---------------------//
     useEffect(() => {
         fetchShippingCountries(checkoutToken.id)
-    }, [ ]);
+    }, []);
 
     useEffect(() => {
         if (shippingCountry) fetchSubdivisions(shippingCountry);
@@ -68,20 +68,23 @@ const AddressForm = ({ checkoutToken, next }) => {
         if (shippingSubdivision) fetchShippingOptions(checkoutToken.id, shippingCountry, shippingSubdivision);
     }, [shippingSubdivision]);
 
+    // console.log({ isCheckoutTokenLoading, checkoutToken, live: checkoutToken?.live });
+
+
 
     // Return 
     return (
         <>
             <Typography variant="h6" gutterBottom > Shipping Address </Typography>
             <FormProvider {...methods}>
-                <form onSubmit={methods.handleSubmit(( data )=> next({ ...data, shippingCountry, shippingSubdivision, shippingOption}))}>
+                <form onSubmit={methods.handleSubmit((data) => next({ ...data, shippingCountry, shippingSubdivision, shippingOption }))}>
                     <Grid container spacing={3}>
-                        <FormInput  name='firstName' label="First name" />
-                        <FormInput  name='lastName' label="Last name" />
-                        <FormInput  name='address1' label="Address" />
-                        <FormInput  name='email' label="Email" />
-                        <FormInput  name='city' label="City" />
-                        <FormInput  name='zipCode' label="Zip / Postal code" />
+                        <FormInput name='firstName' label="First name" />
+                        <FormInput name='lastName' label="Last name" />
+                        <FormInput name='address1' label="Address" />
+                        <FormInput name='email' label="Email" />
+                        <FormInput name='city' label="City" />
+                        <FormInput name='zipCode' label="Zip / Postal code" />
                         {/* Shipping Country */}
                         <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Country </InputLabel>
@@ -112,9 +115,11 @@ const AddressForm = ({ checkoutToken, next }) => {
 
                         <Grid item xs={12} sm={6}>
                             <InputLabel>Shipping Options </InputLabel>
-                            <Select value={ shippingOption} fullWidth onChange={(e) =>
-                            shippingOption(e.target.value)
-                            }>
+                            <Select
+                                value={shippingOption}
+                                fullWidth
+                                onChange={(e) => setShippingOption(e.target.value) // changed from: shippingOption(e.target.value)
+                                }>
                                 {options.map((option) => (
                                     <MenuItem key={option.id} value={option.id}>
                                         {option.label}
@@ -123,10 +128,20 @@ const AddressForm = ({ checkoutToken, next }) => {
                             </Select>
                         </Grid>
                     </Grid>
-                    <br/>
+                    <br />
                     <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button  component={Link} to="/cart" varient= "outlined">  Back to Cart</Button>
-                        <Button type="submit" varient= "contained" color = "primary" > Next </Button>
+                        <Button component={Link} to="/cart" varient="outlined">  Back to Cart</Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            disabled={isCheckoutTokenLoading || !checkoutToken || !checkoutToken.live}
+                        >
+                            Next
+                        </Button>
+
+
+                        {/* <Button type="submit" varient="contained" color="primary" > Next </Button> */}
                     </div>
                 </form>
             </FormProvider>

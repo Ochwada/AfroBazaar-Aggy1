@@ -1,16 +1,20 @@
 import React from 'react';
-import { List, Typography, ListItem, ListItemText } from '@mui/material';
+import { List, Typography, ListItem, ListItemText, CircularProgress } from '@mui/material';
+
 
 
 const Review = ({ checkoutToken }) => {
-   /*  if (!checkoutToken || !checkoutToken.live) {
-        return null;
-    } */
+    // If checkoutToken is null or doesn't have the live property, show a loading indicator or message.
+    if (!checkoutToken || !checkoutToken.live) {
+
+        return <CircularProgress />; // or return <div>Loading order details...</div>;
+    }
+
+    // If checkoutToken.live is available, proceed to render the order summary.
     return (
         <>
             <Typography variant="h6" gutterBottom>Order Summary</Typography>
             <List disablePadding>
-    
                  {checkoutToken.live.line_items.map((product) => (
                     <ListItem style={{ padding: '10px 0' }} key={product.name}>
                         <ListItemText primary={product.name} secondary={`Quantity: ${product.quantity}`} />
