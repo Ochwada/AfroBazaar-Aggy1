@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+=======
+
+import { commerce } from './lib/commerce';
+import { Products, Navbar } from './components/'
+>>>>>>> 91493ac (set product and Navbar - also connected to commerce.js)
 
 
 import { commerce } from './lib/commerce';
@@ -18,6 +24,7 @@ const theme = createTheme({
 
 // ------- useState -------------//  
 const App = () => {
+<<<<<<< HEAD
 
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
@@ -82,6 +89,26 @@ const App = () => {
         </div>
       </ThemeProvider>
     </Router>
+=======
+  const [products, setProducts] = useState([]);
+
+
+  const fetchProducts = async () => {
+    const { data } = await commerce.products.list();
+
+    setProducts(data);
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  return (
+    <div>
+      <Navbar />
+      < Products products = {products} />
+    </div>
+>>>>>>> 91493ac (set product and Navbar - also connected to commerce.js)
   );
 }
 
